@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head></head>
+   <body>
+      
+      <h3>
+         <a href = "{{ url_for('hello') }}">Comments - Flask 
+            SQLAlchemy example</a>
+      </h3>
+
+      <table>
+         <thead>
+            <tr>
+               <th>Id</th>
+               <th>Job</th>
+            </tr>
+         </thead>
+         
+         <tbody>
+            {% for job in job %}
+               <tr>
+                  <td>{{ job.id }}</td>
+                  <td>{{ job.job }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      
+   </body>
+</html>
