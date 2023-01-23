@@ -33,7 +33,10 @@ app.config['SQLALCHEMY_POOL_SIZE'] = None
 app.config['SQLALCHEMY_POOL_TIMEOUT'] = None
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 #--------------------------------------------------------------------------------------------------------------
 ###Definicion de los modelos de la base datos
@@ -317,10 +320,12 @@ def consultaSQL2():
 
 @app.route('/', methods=['GET'])
 def hello():
-    db.drop_all()
-    db.create_all()
+    return 'Bienvenido'
+
+@app.route('/historicalCSV', methods=['GET'])
+def historicalCSV():
     csv_historicData()
-    return ''
+    return 'Se ha cargado la data historica de los csv'
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=5000, debug=True)
